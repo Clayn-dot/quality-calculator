@@ -1,0 +1,9 @@
+{
+  "name": "quality-calculator",
+  "version": "0.0.1",
+  "title": "Quality Calculator",
+  "author": "bruklyn.ben",
+  "factorio_version": "2.1",
+  "dependencies": ["base >= 2.1.0", "quality >= 2.1.0"],
+  "description": "Select an area and see how many items of which quality it produces per second, minute, 10 minutes and hour. Accounts for quality modules, productivity, beacons and recycler loops."
+}
