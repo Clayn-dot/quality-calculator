@@ -1,6 +1,6 @@
 # Quality Calculator
 
-A Factorio mod: select an area and see how many items of which quality it produces per second, minute, 10 minutes and hour. It accounts for quality modules (and their quality), productivity (modules, research, built-in), beacons, mining drills and recycler loops.
+A Factorio mod: select an area and see how many items of which quality it produces per second, minute, 10 minutes and hour. It counts your modules, productivity bonuses, mining drills and recycler loops, so you can plan quality production before you build it up.
 
 Works with Factorio 2.0 and 2.1 and needs the Quality mod. Languages: English and Russian.
 

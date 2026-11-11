@@ -2,9 +2,9 @@
 
 The mod is free. If you like it, you can say thanks with a one-time donation on Boosty: no subscription is needed.
 
-Select an area and see how many items of each quality it produces per second, minute, 10 minutes and hour. It handles many real cases, so the numbers hold up in a real factory.
+Select a part of your factory and see how many items of each quality it makes per second, minute, 10 minutes or hour, and what it still needs from outside.
 
-- Uses the real numbers from the game: quality modules (including their quality), productivity, base productivity of the machine, beacons.
+- Takes the real numbers from the game: your modules, productivity bonuses and mining drills, so the result matches what the machines actually do.
 - Shows the share of each quality and the chance to get at least one item during the chosen period.
 - Understands loops with recyclers: the recycler takes what the area produced below the quality you choose, returns components with its own quality chance, and the window shows what still has to be supplied from outside.
 - The result is a theoretical maximum: all machines run without downtime.
