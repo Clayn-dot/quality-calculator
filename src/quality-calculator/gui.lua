@@ -143,7 +143,6 @@ local function create_window(player, state)
   local scroll = inner.add{type = "scroll-pane", name = "qcalc_scroll",
     horizontal_scroll_policy = "never", vertical_scroll_policy = "auto"}
   scroll.style.maximal_height = 520
-  scroll.style.minimal_width = 560
   scroll.style.top_margin = 6
   -- a scroll pane has no vertical_spacing (the game crashes), so inside it a flow gives the spacing between frames
   local content = scroll.add{type = "flow", name = "qcalc_content", direction = "vertical"}

@@ -103,12 +103,31 @@ end
 local function feed_seed(st, lane, sum, lane_taken, new_feed)
   local want = lane.capacity - sum
   local rate = st.input.supply and st.input.supply[lane.item]
-  if rate ~= nil then want = math.min(want, rate) end
-  lane.feed = want
-  lane.is_seed = true
-  lane_taken[lane.feed_q] = lane_taken[lane.feed_q] + want
   local fed = vec(new_feed, lane.item, st.n)
-  fed[lane.feed_q] = fed[lane.feed_q] + want
+  lane.is_seed = true
+  local w = rate ~= nil and st.seed_weights[lane.item] or nil
+  if not w then
+    if rate ~= nil then want = math.min(want, rate) end
+    lane.feed = want
+    lane_taken[lane.feed_q] = lane_taken[lane.feed_q] + want
+    fed[lane.feed_q] = fed[lane.feed_q] + want
+    return
+  end
+  -- set supply: every lane gets the share of the qualities it takes
+  local share = 0
+  for q = 1, st.n do
+    if lane.allowed[q] then share = share + w[q] end
+  end
+  local total = math.min(want, rate * share)
+  lane.feed = total
+  if share <= EPS then return end
+  for q = 1, st.n do
+    if lane.allowed[q] then
+      local part = total * w[q] / share
+      lane_taken[q] = lane_taken[q] + part
+      fed[q] = fed[q] + part
+    end
+  end
 end
 
 -- Outside top-up of a lane with no internal source (raw item without a chain), up to full capacity.
@@ -169,7 +188,8 @@ local function lane_step(st, lane, total, demand, new_out, new_intake, new_feed)
   local other_sum = math.max(0, sum - own_sum)
   local external_ok = lane.external or ((not st.made[item]) and other_sum <= EPS)
   local seed = st.seed_by_item[item]
-  if seed and (lane.key == "pool" or lane.key == seed.q) and lane.capacity > sum + EPS then
+  local split = seed and st.input.supply and st.input.supply[item] ~= nil and st.seed_weights[item]
+  if seed and (split or lane.key == "pool" or lane.key == seed.q) and lane.capacity > sum + EPS then
     feed_seed(st, lane, sum, lane_taken, new_feed)
   elseif external_ok and lane.capacity > sum + EPS then
     feed_external(st, lane, sum, lane_taken, new_feed, total, demand)

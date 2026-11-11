@@ -5,5 +5,5 @@
   "author": "bruklyn.ben",
   "factorio_version": "2.1",
   "dependencies": ["base >= 2.1.0", "quality >= 2.1.0"],
-  "description": "Select an area and see how many items of which quality it produces per second, minute, 10 minutes and hour. Accounts for quality modules, productivity, beacons and recycler loops."
+  "description": "Select an area and see how many items of each quality it produces, per second, minute, 10 minutes and hour. It handles many real cases (quality and productivity modules, beacons, mining drills, recycler loops), so the numbers hold up in a real factory."
 }

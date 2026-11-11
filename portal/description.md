@@ -2,7 +2,7 @@
 
 The mod is free. If you like it, you can say thanks with a one-time donation on Boosty: no subscription is needed.
 
-Select an area and see how many items of which quality it produces per second, minute, 10 minutes and hour.
+Select an area and see how many items of each quality it produces per second, minute, 10 minutes and hour. It handles many real cases, so the numbers hold up in a real factory.
 
 - Uses the real numbers from the game: quality modules (including their quality), productivity, base productivity of the machine, beacons.
 - Shows the share of each quality and the chance to get at least one item during the chosen period.
@@ -14,7 +14,7 @@ How to use: click the shortcut or press `CTRL + SHIFT + Q`, then drag over the m
 
 ## Compatibility
 
-Factorio 2.1, requires the Quality mod.
+Factorio 2.1 and 2.0 (separate downloads), requires the Quality mod.
 
 ## Support
 

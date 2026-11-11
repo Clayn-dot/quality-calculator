@@ -154,6 +154,32 @@ local function find_capped(st)
   if next(capped) then st.limited = true end
 end
 
+-- Quality split of a supplied loop item: the same as the area's own machines make it (full load), since the
+-- outside supply comes from machines like them. Without such machines the weights stay nil (all goes to the lowest lane).
+local function find_seed_weights(st)
+  st.seed_weights = {}
+  for item in pairs(st.seed_by_item) do
+    local w, sum = {}, 0
+    for q = 1, st.n do w[q] = 0 end
+    -- only crafters that take normal-quality (lowest recipe quality) ingredients: higher lines are fed from
+    -- inside the area, not from outside. The quality of the machine itself does not matter here.
+    local lowest = st.n + 1
+    for _, m in ipairs(st.crafters) do
+      if m._prod[item] and (m.quality or 1) < lowest then lowest = m.quality or 1 end
+    end
+    for _, m in ipairs(st.crafters) do
+      local v = m._prod[item]
+      if v and (m.quality or 1) == lowest then
+        for q = 1, st.n do w[q] = w[q] + v[q] sum = sum + v[q] end
+      end
+    end
+    if sum > EPS then
+      for q = 1, st.n do w[q] = w[q] / sum end
+      st.seed_weights[item] = w
+    end
+  end
+end
+
 -- Machines that depend on items made by the area itself (only they are limited by the inflow).
 local function find_limited_machines(st)
   st.lim_machines, st.lim_key = {}, {}
@@ -218,6 +244,7 @@ function setup.build(input)
   if input.limited then
     for _, seed in ipairs(seeds.find(input)) do st.seed_by_item[seed.item] = seed end
   end
+  find_seed_weights(st)
   find_capped(st)
   find_limited_machines(st)
   prepare_lanes(st)
