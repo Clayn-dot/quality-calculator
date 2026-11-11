@@ -5,5 +5,5 @@
   "author": "bruklyn.ben",
   "factorio_version": "2.1",
   "dependencies": ["base >= 2.1.0", "quality >= 2.1.0"],
-  "description": "How good is your factory, really? Drag a box over your machines and see what quality it gives you over any stretch of time. Type in what you actually feed in, and the numbers follow."
+  "description": "Build better quality and recycler loops. Drag a box over your machines to see what they give you, what you must feed in and where the loop is stuck. Includes module quality, speed and productivity."
 }
