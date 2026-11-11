@@ -5,3 +5,4 @@ __pycache__/
 *.zip
 .vscode/
 tools/install_testbed.py
+tools/make_thumbnail.py
