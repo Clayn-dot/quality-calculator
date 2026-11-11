@@ -5,5 +5,5 @@
   "author": "bruklyn.ben",
   "factorio_version": "2.1",
   "dependencies": ["base >= 2.1.0", "quality >= 2.1.0"],
-  "description": "Select a part of your factory and see how many items of each quality it makes per second, minute, 10 minutes or hour, and what it still needs from outside. It counts your modules, productivity bonuses, mining drills and recycler loops, so you can plan quality production before you build it up."
+  "description": "Drag a box over your machines and see how many items of each quality they make, per second, minute, 10 minutes or hour. Shows what you still have to feed in and how the recyclers are loaded."
 }
