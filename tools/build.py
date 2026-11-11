@@ -1,10 +1,25 @@
 """Builds the mod zip: dist/for-<game version>/<name>_<version>.zip (inside a <name>_<version>/ folder).
 Run: python tools/build.py [2.1|2.0|all]  (default 2.1, as in src/.../info.json)
+Mod version per game: 2.0 -> 1.0.0, 2.1 -> 1.1.0 (MOD_VERSIONS)
 The 2.0 build uses the same sources and changes only factorio_version and dependencies in info.json."""
-import json, pathlib, sys, zipfile
+import json, pathlib, re, sys, zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BASE_VERSIONS = {"2.0": "2.0.0", "2.1": "2.1.0"}
+MOD_VERSIONS = {"2.0": "1.0.0", "2.1": "1.1.0"}
+
+
+def vkey(v):
+    return tuple(int(x) for x in v.split("."))
+
+
+def trim_changelog(text, ver):
+    """Drops changelog sections newer than the version being built."""
+    dash = "-" * 99
+    sep = dash + "\n"
+    parts = [p for p in text.split(sep) if p.strip()]
+    keep = [p for p in parts if vkey(re.match(r"Version: (\S+)", p).group(1)) <= vkey(ver)]
+    return "".join(sep + p for p in keep)
 
 
 def build(game=None):
@@ -13,10 +28,11 @@ def build(game=None):
         raise SystemExit(f"Expected exactly one mod in src, found: {len(mods)}")
     src = mods[0]
     info = json.loads((src / "info.json").read_text(encoding="utf-8"))
-    name, ver = info["name"], info["version"]
+    name = info["name"]
     game = game or info["factorio_version"]
     if game not in BASE_VERSIONS:
         raise SystemExit(f"Unknown game version: {game}")
+    ver = info["version"] = MOD_VERSIONS[game]
     if game != info["factorio_version"]:
         info["factorio_version"] = game
         info["dependencies"] = [d.replace(info_base(d), BASE_VERSIONS[game]) if info_base(d) else d
