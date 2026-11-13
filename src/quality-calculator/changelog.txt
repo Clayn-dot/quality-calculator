@@ -1,10 +1,22 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.1
+Date: 2026-11-13
+  Changes:
+    - Rows of the result tables are separated by lines.
+    - New cover image.
+---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 2026-11-11
   Changes:
     - Build for Factorio 2.1.
     - Supply of a recycle loop item is split by quality.
     - The window has no minimal width any more.
+---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 2026-11-13
+  Changes:
+    - Rows of the result tables are separated by lines.
+    - New cover image.
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 2026-11-11
