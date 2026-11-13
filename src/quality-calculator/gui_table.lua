@@ -294,7 +294,8 @@ local function add_matrix(body, rows, chain, result, seconds, decimals, with_sha
     colw = column_width(rows, n, result, seconds, decimals, with_share)}
   local t = body.add{type = "table", column_count = n + 1 + (supply_of and 1 or 0)}
   t.style.horizontal_spacing = 8
-  t.style.vertical_spacing = 4
+  t.style.vertical_spacing = 8
+  t.draw_horizontal_lines = true
   add_header(t, ctx)
   for _, row in ipairs(rows) do
     local slot = t.add{type = "sprite-button", sprite = "item/" .. row.name, style = "slot_button",
